@@ -1,0 +1,124 @@
+<html>
+<head>
+	<title> To do</title>
+	<style type="text/css">
+		body{
+			font-family: sans-serif;
+
+		}
+#mainHeading {
+	text-align: center;
+}
+
+.todoClass,.grid{
+	display: grid;
+	place-item : center;
+	grid-template-columns: 200px 150px 100px ;
+	column-gap: 8px;
+	row-gap : 8px;
+	margin: 8px;
+	align-items: center;
+	border-radius: 2px;
+
+	
+}
+#todoInput,#todoDate{
+	font-size: 15px;
+	padding: 8px 5px;
+	border-radius: 15px;
+	
+
+}
+.btnDelete{
+	background-color: red;
+	color: white;
+	border : none;
+	border-radius: 10px;
+	padding: 8px 5px ;
+	cursor: pointer;
+}
+.btnTodo{
+	background-color: green;
+	color: white;
+	border : none;
+	border-radius: 10px;
+	padding: 8px 5px ;
+	cursor: pointer;
+}
+
+</style>
+</head>
+<body> 
+
+	<h2 id="mainHeading"> Todo App</h2>
+
+<div class="grid">
+	<input id="todoInput" type="tex" placeholder="Enter Your Work " required>
+	<input  id="todoDate" type="date" required>
+	<button  class="btnTodo"  onclick="addtodo();" >Add </button>
+	</div>
+
+	<div class="todoClass"></div>
+
+
+	
+
+
+
+
+	<script type="text/javascript">
+
+let todoList = [
+{item:"Buy milk",
+dueDate: '04/05/2013'}
+
+];
+displayItem();
+
+
+	function addtodo()
+	{
+			let	inputElement = document.querySelector('#todoInput'); 
+			let	dateElement = document.querySelector('#todoDate'); 
+			
+			let todoItem = inputElement.value;
+			let todoDate = dateElement.value;
+			todoList.push({item : todoItem,
+							dueDate: todoDate});
+			inputElement.value ='';
+			dateElement.value ='';
+
+			displayItem();
+
+
+	}
+
+	function displayItem(){
+		let displayElement = document.querySelector('.todoClass');
+
+		let newhtml = '';
+		
+		displayElement.innerText= '';
+
+		for (i=0 ; i< todoList.length; i++)
+		{
+			// let item = todoList[i].item;
+			// let dueDate = todoList[i].dueDate;
+			let {item, dueDate} = todoList[i]
+
+			newhtml += `<span> ${item}</span> <span> ${dueDate}</span> <button class="btnDelete"onclick="todoList.splice(${i},1);
+			displayItem();"> delete</button>`
+			displayElement.innerText = displayElement.innerText + "\n"+todoList[i];
+		}
+		displayElement.innerHTML = newhtml;
+
+
+
+
+	}
+
+
+	</script>
+</body>
+
+</html>
